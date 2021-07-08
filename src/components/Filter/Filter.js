@@ -6,7 +6,7 @@ function Filter({ value, onChangeFilter }) {
   return (
     <form>
       <label className={styles.label}>
-        Filter tasks:{' '}
+        Filter contacts:{' '}
         <input
           className={styles.input}
           type="text"
