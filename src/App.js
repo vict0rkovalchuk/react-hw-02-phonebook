@@ -4,11 +4,15 @@ import ContactList from './components/ContactList/ContactList';
 import ContactForm from './components/ContactForm/ContactForm';
 import Filter from './components/Filter/Filter';
 import { v4 as uuidv4 } from 'uuid';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class App extends Component {
   static propTypes = {};
 
   state = { contacts: [], filter: '' };
+
+  notify = () => toast('This user already exists!');
 
   addTask = (text, number) => {
     let task = {
@@ -18,7 +22,7 @@ class App extends Component {
     };
 
     this.state.contacts.find(task => task.text === text)
-      ? alert('Such name already exists')
+      ? this.notify()
       : this.setState(prevState => {
           return { contacts: [...prevState.contacts, task] };
         });
@@ -49,6 +53,7 @@ class App extends Component {
     return (
       <Layout>
         <h1>Phonebook</h1>
+        <ToastContainer />
         <ContactForm onAddTask={this.addTask} />
         <h2>Contacts</h2>
         <Filter value={filter} onChangeFilter={this.changeFilter} />
